@@ -1,8 +1,16 @@
 const Book = require('../models/book')
 
 exports.getAll = async() => {
-    const books = await Book.find()
-    return books
+    const res = await Book.find()
+    return res
+}
+
+exports.getBySlug = async(slug) => {
+    const res = await Book.findOne({
+        slug
+    })
+
+    return res
 }
 
 exports.create = async(data) => { 
