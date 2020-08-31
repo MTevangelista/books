@@ -25,10 +25,6 @@ mongoose.connect(process.env.MONGO_URL, {
 // Routes
 app.use('/', BookRoute)
 
-app.get('/', (req, res) => {
-    res.json('Hello World')
-})
-
 const port = 3333
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

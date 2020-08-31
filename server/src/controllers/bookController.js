@@ -1,6 +1,17 @@
 const ValidationContract = require('../validators/fluentValidator')
 const repository = require('../repositories/bookRepository')
 
+exports.getAll = async(req, res) => {
+    try {
+        let books = await repository.getAll()
+        return res.json({books})
+    } catch (e) {
+        return res.status(400).json({
+            error: 'Unexpected error while listing all books'
+        })
+    }
+}
+
 exports.create = async(req, res) => {
     const { imageUrl, author, title, slug, theme, description, price, publisher, isbn, totalPages } = req.body
 
@@ -10,7 +21,7 @@ exports.create = async(req, res) => {
         contract.hasMinLen(slug, 3, 'The slug must contain at least 3 characters')
 
         if (!contract.isValid) {
-            return res.status(400).json(contract.errors()).end()
+            return res.status(400).send(contract.errors()).end()
         }
 
         const book = {
