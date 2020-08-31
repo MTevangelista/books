@@ -17,6 +17,13 @@ const BookSchema = new Schema({
         required: true,
         trim: true
     },
+    slug: {
+        type: String,
+        required: true,
+        trim: true,
+        index: true,
+        unique: true
+    },
     theme: {
         type: String,
         required: true,
@@ -27,7 +34,11 @@ const BookSchema = new Schema({
         required: true,
         trim: true
     },
-    Publisher: {
+    price: {
+        type: Number,
+        required: true
+    },
+    publisher: {
         type: String,
         required: true,
         trim: true
