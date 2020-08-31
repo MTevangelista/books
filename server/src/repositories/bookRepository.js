@@ -5,6 +5,15 @@ exports.getAll = async() => {
     return res
 }
 
+exports.getAllByFilter = async(filter) => {
+    const res = await Book.find({
+        theme: filter.theme
+    })
+
+    return res
+}
+
+
 exports.getBySlug = async(slug) => {
     const res = await Book.findOne({
         slug

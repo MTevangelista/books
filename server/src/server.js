@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGO_URL, {
     console.log(`Connection error: ${err}`);
 })
 // Routes
-app.use('/', BookRoute)
+app.use('/books', BookRoute)
 
 const port = 3333
 app.listen(port, () => {

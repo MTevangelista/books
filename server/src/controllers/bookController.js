@@ -11,6 +11,26 @@ exports.getAll = async(req, res) => {
     }
 }
 
+exports.getAllByFilter = async(req, res) => {
+    const filter = req.query
+
+    if (!filter.theme) {
+        return res.status(400).json({
+            error: 'Missing filter to search books'
+        })
+    }
+
+    try {
+        let books = await repository.getAllByFilter(filter)
+        return res.json(books)
+    } catch (e) {
+        console.log(e);
+        return res.status(400).json({
+            error: 'Unexpected error while listing books by filter'
+        })
+    }
+}
+
 exports.getBySlug = async(req, res) => {
     const { slug } = req.params
 
