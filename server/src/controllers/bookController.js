@@ -1,10 +1,10 @@
 const ValidationContract = require('../validators/fluentValidator')
 const repository = require('../repositories/bookRepository')
 
-exports.getAll = async(req, res) => {
+exports.getAll = async (req, res) => {
     try {
         let books = await repository.getAll()
-        return res.json({books})
+        return res.json({ books })
     } catch (e) {
         return res.status(400).json({
             error: 'Unexpected error while listing all books'
@@ -12,37 +12,28 @@ exports.getAll = async(req, res) => {
     }
 }
 
-exports.create = async(req, res) => {
+exports.create = async (req, res) => {
     const { imageUrl, author, title, slug, theme, description, price, publisher, isbn, totalPages } = req.body
 
-        let contract = new ValidationContract()
-        contract.hasMinLen(author, 2, 'The author must contain at least 3 characters')
-        contract.hasMinLen(title, 3, 'The title must contain at least 3 characters')
-        contract.hasMinLen(slug, 3, 'The slug must contain at least 3 characters')
+    const book = {
+        imageUrl,
+        author,
+        title,
+        slug,
+        theme,
+        description,
+        price,
+        publisher,
+        isbn,
+        totalPages
+    }
 
-        if (!contract.isValid) {
-            return res.status(400).send(contract.errors()).end()
-        }
-
-        const book = {
-            imageUrl,
-            author,
-            title,
-            slug,
-            theme,
-            description,
-            price,
-            publisher,
-            isbn,
-            totalPages
-        }
-
-        try {
-            await repository.create(book)
-            return res.status(201).send()
-        } catch (e) {
-            return res.status(400).json({
-                error: 'Unexpected error while creating a new book'
-            })
-        }
+    try {
+        await repository.create(book)
+        return res.status(201).send()
+    } catch (e) {
+        return res.status(400).json({
+            error: 'Unexpected error while creating a new book'
+        })
+    }
 }
