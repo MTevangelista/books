@@ -4,6 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 
+const BookRoute = require('./routes/bookRoute')
+
 const app = express();
 
 // Settings
@@ -20,6 +22,8 @@ mongoose.connect(process.env.MONGO_URL, {
 }).catch((err) => {
     console.log(`Connection error: ${err}`);
 })
+// Routes
+app.use('/', BookRoute)
 
 app.get('/', (req, res) => {
     res.json('Hello World')
