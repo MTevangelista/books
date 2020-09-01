@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-navbar class="top-bar-container" fixed="top" toggleable="lg">
+    <b-navbar type="dark" variant="dark" fixed="top" toggleable="lg">
       <b-navbar-nav class="ml-5">
         <b-nav-item class="nav-item-style">
           <router-link class="router-link-navbar" :to="{ name: 'Home' }">Home</router-link>
@@ -14,14 +14,16 @@
       </b-navbar-nav>
     </b-navbar>
 
-    <b-card bg-variant="light" class="card">
+    <h1 class="test">Cadastrar Livro</h1>
+
+    <b-card bg-variant="light">
       <b-form>
         <b-form-group
           id="image-url"
           v-model.trim.lazy="book.imageUrl"
           label="Imagem"
           :label-for="book.imageUrl"
-          style="width: 70%; margin: 0 auto"
+          style="width: 70%; margin: 0px auto"
         >
           <b-form-input
             id="input-image-url"
@@ -37,7 +39,7 @@
           v-model.trim.lazy="book.auhtor"
           label="Autor"
           :label-for="book.auhtor"
-          style="width: 70%; margin: 0 auto"
+          style="width: 70%; margin: 10px auto"
         >
           <b-form-input id="input-author" type="text" name="author" required placeholder="Autor"></b-form-input>
         </b-form-group>
@@ -45,16 +47,16 @@
         <b-form-group
           id="title"
           v-model.trim.lazy="book.title"
-          label="Título do filme"
+          label="Título"
           :label-for="book.title"
-          style="width: 70%; margin: 0 auto"
+          style="width: 70%; margin: 10px auto"
         >
           <b-form-input
             id="input-title"
             type="text"
             name="title"
             required
-            placeholder="Título do filme"
+            placeholder="Título"
           ></b-form-input>
         </b-form-group>
 
@@ -63,7 +65,7 @@
           v-model.trim.lazy="book.slug"
           label="Slug"
           :label-for="book.slug"
-          style="width: 70%; margin: 0 auto"
+          style="width: 70%; margin: 10px auto"
         >
           <b-form-input id="input-slug" type="text" name="slug" required placeholder="Slug"></b-form-input>
         </b-form-group>
@@ -72,7 +74,7 @@
           id="select-theme"
           label="Tema"
           :label-for="book.theme"
-          style="width: 70%; margin: 0 auto"
+          style="width: 70%; margin: 10px auto"
         >
           <b-form-select id="theme" v-model="book.theme" :options="themes" required></b-form-select>
         </b-form-group>
@@ -82,64 +84,26 @@
           v-model.trim.lazy="book.description"
           label="Descrição"
           :label-for="book.description"
-          style="width: 70%; margin: 0 auto"
+          style="width: 70%; margin: 10px auto"
         >
           <b-form-textarea id="textarea" v-model="book.description" placeholder="Descrição"></b-form-textarea>
         </b-form-group>
 
         <b-form-group
-          id="price"
-          v-model.trim.lazy="book.price"
-          label="Preço"
-          :label-for="book.price"
-          style="width: 70%; margin: 0 auto"
+          id="created-at"
+          v-model.trim.lazy="book.createdAt"
+          label="Data do lançamento"
+          :label-for="book.createdAt"
+          style="width: 70%; margin: 10px auto"
         >
-          <b-form-input id="input-price" type="number" name="price" required placeholder="Preço"></b-form-input>
+          <b-form-datepicker id="created-at" :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }" v-model="book.createdAt" placeholder="Data do lançamento" class="mb-2"></b-form-datepicker>
         </b-form-group>
 
-        <b-form-group
-          id="publisher"
-          v-model.trim.lazy="book.publisher"
-          label="Editora"
-          :label-for="book.publisher"
-          style="width: 70%; margin: 0 auto"
-        >
-          <b-form-input
-            id="input-publisher"
-            type="text"
-            name="publisher"
-            required
-            placeholder="Editora"
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group
-          id="isbn"
-          v-model.trim.lazy="book.isbn"
-          label="Isbn"
-          :label-for="book.isbn"
-          style="width: 70%; margin: 0 auto"
-        >
-          <b-form-input id="input-isbn" type="number" name="isbn" required placeholder="Isbn"></b-form-input>
-        </b-form-group>
-
-        <b-form-group
-          id="totalPages"
-          v-model.trim.lazy="book.totalPages"
-          label="Total de páginas"
-          :label-for="book.totalPages"
-          style="width: 70%; margin: 0 auto"
-        >
-          <b-form-input
-            id="input-totalPages"
-            type="number"
-            name="totalPages"
-            required
-            placeholder="Total de páginas"
-          ></b-form-input>
-        </b-form-group>
-
-        <b-button type="submit" variant="outline-primary" class="mt-4">Cadastrar</b-button>
+        <b-row>
+            <b-col class="text-center">
+                <b-button type="submit" variant="outline-success" class="mt-4">Cadastrar</b-button>
+            </b-col>
+        </b-row>
       </b-form>
     </b-card>
   </b-container>
@@ -154,13 +118,10 @@ export default {
         imageUrl: "",
         author: "",
         title: "",
+        createdAt: "",
         slug: "",
         theme: null,
         description: "",
-        price: 0,
-        publisher: "",
-        isbn: 0,
-        totalPages: 0
       },
       themes: [
         { valor: null, text: "Selecione uma opção" },
@@ -176,8 +137,10 @@ export default {
 </script>
 
 <style scoped>
-.card {
+.test {
   margin-top: 100px;
+  margin-bottom: 40px;
+  text-align: center;
 }
 
 textarea {
