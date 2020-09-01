@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from '../src/pages/Home.vue'
-import BookForm from '../src/pages/BookForm.vue'
+import BookForm from '../src/components/BookForm.vue'
 
 Vue.use(VueRouter);
 

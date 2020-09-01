@@ -1,5 +1,5 @@
 <template>
-  <b-container class="text-center mt-5">
+  <b-container class="mt-5">
     <router-view />
   </b-container>
 </template>
