@@ -41,3 +41,7 @@ exports.update = async(_id, { imageUrl, author, title, theme, description, price
         }
     })
 }
+
+exports.delete = async(_id) => {
+    await Book.findByIdAndRemove(_id)
+}

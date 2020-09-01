@@ -88,11 +88,23 @@ exports.put = async(req, res) => {
 
     try {
         await repository.update(_id, newBook)
-        return res.status(201).send({ message: 'Successfully updated book!' })
+        return res.status(201).json({ message: 'Successfully updated book!' })
     } catch (e) {
-        console.log(e);
         return res.status(400).json({
             error: 'Unexpected error while editing a new book'
+        })
+    }
+}
+
+exports.delete = async(req, res) => {
+    const { _id } = req.params
+
+    try {
+        await repository.delete(_id)
+        return res.status(201).json({ message: 'Successfully deleted book!' })
+    } catch (e) {
+        return res.status(400).json({
+            error: 'Unexpected error while deleting a book'
         })
     }
 }
