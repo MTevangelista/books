@@ -69,3 +69,30 @@ exports.create = async(req, res) => {
         })
     }
 }
+
+exports.put = async(req, res) => {
+    const { _id } = req.params
+    const { imageUrl, author, title, theme, description, price, publisher, isbn, totalPages } = req.body 
+
+    const newBook = {
+        imageUrl,
+        author, 
+        title,
+        theme,
+        description,
+        price,
+        publisher,
+        isbn,
+        totalPages
+    }
+
+    try {
+        await repository.update(_id, newBook)
+        return res.status(201).send({ message: 'Successfully updated book!' })
+    } catch (e) {
+        console.log(e);
+        return res.status(400).json({
+            error: 'Unexpected error while editing a new book'
+        })
+    }
+}

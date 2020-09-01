@@ -14,6 +14,7 @@ const app = express();
     app.use(bodyParser.urlencoded({ extended: false }))
 // Mongo
 mongoose.connect(process.env.MONGO_URL, {
+    useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
@@ -23,6 +24,7 @@ mongoose.connect(process.env.MONGO_URL, {
     console.log(`Connection error: ${err}`);
 })
 // Routes
+app.use('/', BookRoute)
 app.use('/books', BookRoute)
 
 const port = 3333
