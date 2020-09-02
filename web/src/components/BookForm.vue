@@ -3,13 +3,17 @@
     <b-navbar type="dark" variant="dark" fixed="top" toggleable="lg">
       <b-navbar-nav class="ml-5">
         <b-nav-item class="nav-item-style">
-          <router-link class="router-link-navbar" :to="{ name: 'Home' }">Home</router-link>
+          <router-link class="router-link-navbar" :to="{ name: 'Home' }"
+            >Home</router-link
+          >
         </b-nav-item>
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto mr-5">
         <b-nav-item class="nav-item-style">
-          <router-link class="router-link-navbar" :to="{ name: 'BookForm' }">Novo Livro</router-link>
+          <router-link class="router-link-navbar" :to="{ name: 'BookForm' }"
+            >Novo Livro</router-link
+          >
         </b-nav-item>
       </b-navbar-nav>
     </b-navbar>
@@ -17,16 +21,16 @@
     <h1 class="test">Cadastrar Livro</h1>
 
     <b-card bg-variant="light">
-      <b-form>
+      <b-form @submit="handleCreateBook">
         <b-form-group
           id="image-url"
-          v-model.trim.lazy="book.imageUrl"
           label="Imagem"
           :label-for="book.imageUrl"
           style="width: 70%; margin: 0px auto"
         >
           <b-form-input
             id="input-image-url"
+            v-model.trim.lazy="book.imageUrl"
             type="text"
             name="imageUrl"
             required
@@ -36,23 +40,29 @@
 
         <b-form-group
           id="author"
-          v-model.trim.lazy="book.auhtor"
           label="Autor"
-          :label-for="book.auhtor"
-          style="width: 70%; margin: 10px auto"
+          :label-for="book.author"
+          style="width: 70%; margin: 0px auto"
         >
-          <b-form-input id="input-author" type="text" name="author" required placeholder="Autor"></b-form-input>
+          <b-form-input
+            id="input-author"
+            v-model.trim.lazy="book.author"
+            type="text"
+            name="author"
+            required
+            placeholder="Autor"
+          ></b-form-input>
         </b-form-group>
 
         <b-form-group
           id="title"
-          v-model.trim.lazy="book.title"
           label="Título"
           :label-for="book.title"
           style="width: 70%; margin: 10px auto"
         >
           <b-form-input
             id="input-title"
+            v-model.trim.lazy="book.title"
             type="text"
             name="title"
             required
@@ -62,12 +72,18 @@
 
         <b-form-group
           id="slug"
-          v-model.trim.lazy="book.slug"
           label="Slug"
           :label-for="book.slug"
           style="width: 70%; margin: 10px auto"
         >
-          <b-form-input id="input-slug" type="text" name="slug" required placeholder="Slug"></b-form-input>
+          <b-form-input
+            id="input-slug"
+            v-model.trim.lazy="book.slug"
+            type="text"
+            name="slug"
+            required
+            placeholder="Slug"
+          ></b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -76,7 +92,13 @@
           :label-for="book.theme"
           style="width: 70%; margin: 10px auto"
         >
-          <b-form-select id="theme" v-model="book.theme" :options="themes" required></b-form-select>
+          <b-form-select
+            id="theme"
+            v-model="book.theme"
+            name="theme"
+            :options="themes"
+            required
+          ></b-form-select>
         </b-form-group>
 
         <b-form-group
@@ -86,7 +108,13 @@
           :label-for="book.description"
           style="width: 70%; margin: 10px auto"
         >
-          <b-form-textarea id="textarea" v-model="book.description" placeholder="Descrição"></b-form-textarea>
+          <b-form-textarea
+            id="textarea"
+            v-model="book.description"
+            name="description"
+            required
+            placeholder="Descrição"
+          ></b-form-textarea>
         </b-form-group>
 
         <b-form-group
@@ -96,13 +124,27 @@
           :label-for="book.createdAt"
           style="width: 70%; margin: 10px auto"
         >
-          <b-form-datepicker id="created-at" :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }" v-model="book.createdAt" placeholder="Data do lançamento" class="mb-2"></b-form-datepicker>
+          <b-form-datepicker
+            id="created-at"
+            :date-format-options="{
+              year: 'numeric',
+              month: 'numeric',
+              day: 'numeric',
+            }"
+            v-model="book.createdAt"
+            description
+            name="createdAt"
+            placeholder="Data do lançamento"
+            class="mb-2"
+          ></b-form-datepicker>
         </b-form-group>
 
         <b-row>
-            <b-col class="text-center">
-                <b-button type="submit" variant="outline-success" class="mt-4">Cadastrar</b-button>
-            </b-col>
+          <b-col class="text-center">
+            <b-button type="submit" variant="outline-success" class="mt-4"
+              >Cadastrar</b-button
+            >
+          </b-col>
         </b-row>
       </b-form>
     </b-card>
@@ -110,6 +152,9 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import Swal from "sweetalert2";
+
 export default {
   name: "BookForm",
   data() {
@@ -118,10 +163,10 @@ export default {
         imageUrl: "",
         author: "",
         title: "",
-        createdAt: "",
         slug: "",
         theme: null,
         description: "",
+        createdAt: "",
       },
       themes: [
         { valor: null, text: "Selecione uma opção" },
@@ -129,10 +174,42 @@ export default {
         { value: "Suspense", text: "Suspense" },
         { value: "Ação", text: "Ação" },
         { value: "Ficção", text: "Ficção" },
-        { value: "Outros", text: "Outros" }
-      ]
+        { value: "Outros", text: "Outros" },
+      ],
     };
-  }
+  },
+  methods: {
+    ...mapActions(["addBook"]),
+    handleCreateBook(event) {
+      event.preventDefault();
+
+      this.addBook({
+        imageUrl: this.book.imageUrl,
+        author: this.book.author,
+        title: this.book.title,
+        slug: this.book.slug,
+        theme: this.book.theme,
+        description: this.book.description,
+        createdAt: this.book.createdAt,
+      })
+        .then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Cadastro realizado com sucesso!",
+            showConfirmButton: false,
+            timer: 1700,
+          });
+        })
+        .catch(() => {
+          Swal.fire({
+            icon: "error",
+            title: "Erro no cadastro!",
+            showConfirmButton: false,
+            timer: 1700,
+          });
+        });
+    },
+  },
 };
 </script>
 
