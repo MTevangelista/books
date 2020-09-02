@@ -20,7 +20,12 @@
       </b-col>
     </b-row>
 
-    <b-card-group deck class="test">
+    <b-form class="search-books" @submit="searchBooks">
+      <b-form-select class="search-select" v-model="theme" :options="options"></b-form-select>
+      <b-button type="submit" variant="outline-success">Buscar</b-button>
+    </b-form>
+
+    <b-card-group deck class="card-group">
       <b-card
         title="Código Limpo"
         sub-title="Tecnologia"
@@ -48,12 +53,43 @@
 <script>
 export default {
   name: "Home",
-  components: {}
+  components: {},
+  data() {
+    return {
+      theme: null,
+      options: [
+        { valor: null, text: "Buscar por tema" },
+        { value: "Romance", text: "Romance" },
+        { value: "Suspense", text: "Suspense" },
+        { value: "Ação", text: "Ação" },
+        { value: "Ficção", text: "Ficção" },
+        { value: "Outros", text: "Outros" }
+      ]
+    };
+  },
+  methods: {
+    searchBooks(event) {
+      event.preventDefault();
+      console.log("ok");
+    }
+  }
 };
 </script>
 
 <style>
-.test {
+.search-books {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.search-select {
+  width: 60%;
+  margin-right: 10px;
+}
+
+.card-group {
   display: flex;
   align-items: center;
   justify-content: space-around;
