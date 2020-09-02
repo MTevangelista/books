@@ -43,7 +43,7 @@
 
           <b-card-text class="buttons-container">
             <b-button variant="outline-info">Editar</b-button>
-            <b-button variant="outline-danger">Apagar</b-button>
+            <b-button variant="outline-danger" @click="deleteBook(book._id)">Apagar</b-button>
           </b-card-text>
         </b-card>
       </b-card-group>
@@ -70,7 +70,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["fetchBooks", "deleteTask"]),
+    ...mapActions(["fetchBooks", "deleteBook"]),
     searchBooks(event) {
       event.preventDefault();
       console.log("ok");
@@ -111,10 +111,10 @@ export default {
 
 .cards {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin: 20px 20px 20px 20px;
-  width: 250px;
+  width: 400px;
   min-width: 380px;
 }
 
