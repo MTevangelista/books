@@ -34,29 +34,9 @@ const BookSchema = new Schema({
         required: true,
         trim: true
     },
-    price: {
-        type: String,
-        required: true
-    },
-    publisher: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    isbn: {
-        type: Number,
-        required: true,
-        trim: true
-    },
-    totalPages: {
-        type: Number,
-        required: true,
-        trim: true
-    },
     createdAt: {
-        type: Date,
+        type: String,
         required: true,
-        default: Date.now
     }
 })
 

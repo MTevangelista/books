@@ -26,18 +26,15 @@ exports.create = async(data) => {
     await book.save()
 }
 
-exports.update = async(_id, { imageUrl, author, title, theme, description, price, publisher, isbn, totalPages }) => {
+exports.update = async(_id, { imageUrl, author, title, theme, description, createdAt }) => {
     await Book.findByIdAndUpdate(_id, {
         $set: {
             imageUrl,
             author, 
             title, 
             theme, 
-            description, 
-            price, 
-            publisher, 
-            isbn, 
-            totalPages
+            description,
+            createdAt 
         }
     })
 }

@@ -45,7 +45,7 @@ exports.getBySlug = async(req, res) => {
 }
 
 exports.create = async(req, res) => {
-    const { imageUrl, author, title, slug, theme, description, price, publisher, isbn, totalPages } = req.body
+    const { imageUrl, author, title, slug, theme, description, createdAt } = req.body
 
     const book = {
         imageUrl,
@@ -54,10 +54,7 @@ exports.create = async(req, res) => {
         slug,
         theme,
         description,
-        price,
-        publisher,
-        isbn,
-        totalPages
+        createdAt
     }
 
     try {
@@ -72,7 +69,7 @@ exports.create = async(req, res) => {
 
 exports.put = async(req, res) => {
     const { _id } = req.params
-    const { imageUrl, author, title, theme, description, price, publisher, isbn, totalPages } = req.body 
+    const { imageUrl, author, title, theme, description, createdAt } = req.body 
 
     const newBook = {
         imageUrl,
@@ -80,10 +77,7 @@ exports.put = async(req, res) => {
         title,
         theme,
         description,
-        price,
-        publisher,
-        isbn,
-        totalPages
+        createdAt
     }
 
     try {
