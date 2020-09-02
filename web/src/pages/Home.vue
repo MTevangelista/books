@@ -25,35 +25,37 @@
       <b-button type="submit" variant="outline-success">Buscar</b-button>
     </b-form>
 
-    <b-card-group deck class="card-group">
-      <b-card
-        title="Código Limpo"
-        sub-title="Tecnologia"
-        img-src="https://picsum.photos/600/300/?image=25"
-        img-alt="Código Limpo"
-        img-top
-        tag="article"
-        class="cards"
-      >
-        <b-card-text
-          class="mt-4"
-        >Mesmo códigos ruins podem funcionar. Mas se o código não estiver limpo, ele pode deixar uma organização de desenvolvimento de joelhos. Todos os anos, incontáveis horas e recursos significativos são perdidos devido a códigos mal escritos. Mas não precisa ser assim.</b-card-text>
+    <b-row>
+      <b-card-group deck>
+        <b-card
+          v-for="book in allBooks"
+          :key="book.id"
+          :title="book.title"
+          :sub-title="book.theme"
+          :img-src="book.imageUrl"
+          :img-alt="book.title"
+          img-height="200px"
+          class="cards"
+        >
+          <b-card-text>{{book.description}}</b-card-text>
 
-        <small>Lançamento: 02/11/2020</small>
+          <small>Lançamento: {{ book.createdAt }}</small>
 
-        <b-card-text class="buttons-container">
-          <b-button align-v="start" variant="outline-info">Editar</b-button>
-          <b-button align-v="end" variant="outline-danger">Apagar</b-button>
-        </b-card-text>
-      </b-card>
-    </b-card-group>
+          <b-card-text class="buttons-container">
+            <b-button variant="outline-info">Editar</b-button>
+            <b-button variant="outline-danger">Apagar</b-button>
+          </b-card-text>
+        </b-card>
+      </b-card-group>
+    </b-row>
   </b-container>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "Home",
-  components: {},
   data() {
     return {
       theme: null,
@@ -68,20 +70,22 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["fetchBooks", "deleteTask"]),
     searchBooks(event) {
       event.preventDefault();
       console.log("ok");
     }
+  },
+  computed: mapGetters(["allBooks"]),
+  created() {
+    this.fetchBooks();
   }
 };
 </script>
 
 <style>
 .search-books {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+  text-align: center;
 }
 
 .search-select {
@@ -89,11 +93,6 @@ export default {
   margin-right: 10px;
 }
 
-.card-group {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
 .nav-item-style {
   font-size: 20px;
 }
@@ -111,9 +110,12 @@ export default {
 }
 
 .cards {
-  margin-top: 40px;
-  min-width: 320px;
-  max-width: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 20px 20px 20px;
+  width: 250px;
+  min-width: 380px;
 }
 
 .buttons-container {

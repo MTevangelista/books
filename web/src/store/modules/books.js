@@ -11,12 +11,17 @@ const getters = {
 };
 
 const actions = {
+    async fetchBooks({commit}){
+        const response = await axios.get(baseURL)
+        commit('setBooks', response.data)
+    },
     async addBook({ commit }, book) {
         const response = await axios.post(`${baseURL}/books`, book)
         commit('newBook', response.data)
     }
 };
 const mutations = {
+    setBooks: (state, books) => (state.books = books),
     newBook: (state, book) => state.books.unshift(book)
 };
 

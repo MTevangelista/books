@@ -3,7 +3,7 @@ const repository = require('../repositories/bookRepository')
 exports.getAll = async(req, res) => {
     try {
         let books = await repository.getAll()
-        return res.json({ books })
+        return res.json(books)
     } catch (e) {
         return res.status(400).json({
             error: 'Unexpected error while listing book by slug'
