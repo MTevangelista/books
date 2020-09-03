@@ -18,7 +18,7 @@
       </b-navbar-nav>
     </b-navbar>
 
-    <h1 class="test">Cadastrar Livro</h1>
+    <h1 class="title">Cadastrar Livro</h1>
 
     <b-card bg-variant="light">
       <b-form @submit="handleCreateBook">
@@ -153,7 +153,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 
 export default {
   name: "BookForm",
@@ -183,7 +183,7 @@ export default {
     handleCreateBook(event) {
       event.preventDefault();
 
-      this.addBook({
+      const book = {
         imageUrl: this.book.imageUrl,
         author: this.book.author,
         title: this.book.title,
@@ -191,36 +191,48 @@ export default {
         theme: this.book.theme,
         description: this.book.description,
         createdAt: this.book.createdAt,
-      })
-        .then(() => {
-          Swal.fire({
-            icon: "success",
-            title: "Cadastro realizado com sucesso!",
-            showConfirmButton: false,
-            timer: 1700,
-          });
-        })
-        .catch(() => {
-          Swal.fire({
-            icon: "error",
-            title: "Erro no cadastro!",
-            showConfirmButton: false,
-            timer: 1700,
-          });
-        });
+      }
+
+      this.addBook(book)
+
+      // this.addBook({
+      //   imageUrl: this.book.imageUrl,
+      //   author: this.book.author,
+      //   title: this.book.title,
+      //   slug: this.book.slug,
+      //   theme: this.book.theme,
+      //   description: this.book.description,
+      //   createdAt: this.book.createdAt,
+      // })
+        // .then(() => {
+        //   Swal.fire({
+        //     icon: "success",
+        //     title: "Cadastro realizado com sucesso!",
+        //     showConfirmButton: false,
+        //     timer: 1700,
+        //   });
+        // })
+        // .catch(() => {
+        //   Swal.fire({
+        //     icon: "error",
+        //     title: "Erro no cadastro!",
+        //     showConfirmButton: false,
+        //     timer: 1700,
+        //   });
+        // });
     },
   },
 };
 </script>
 
 <style scoped>
-.test {
+.title {
   margin-top: 100px;
   margin-bottom: 40px;
   text-align: center;
 }
 
 textarea {
-  min-height: 50px;
+  min-height: 80px;
 }
 </style>

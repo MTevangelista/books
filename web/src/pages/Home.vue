@@ -42,7 +42,9 @@
           <small>Lançamento: {{ book.createdAt }}</small>
 
           <b-card-text class="buttons-container">
-            <b-button variant="outline-info">Editar</b-button>
+            <router-link :to="{ name: 'BookDetails', params: { book } }">
+              <b-button variant="outline-info">Editar</b-button>
+            </router-link>
             <b-button variant="outline-danger" @click="deleteBook(book._id)">Apagar</b-button>
           </b-card-text>
         </b-card>
@@ -83,7 +85,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .search-books {
   text-align: center;
 }
