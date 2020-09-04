@@ -65,6 +65,22 @@ const actions = {
     },
     async deleteBook({ commit }, id) {
         await axios.delete(`${baseURL}/books/${id}`)
+            .then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Livro apagado com sucesso!",
+                    showConfirmButton: false,
+                    timer: 1700,
+                });
+            })
+            .catch(() => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Erro na hora de apagar o livro!",
+                    showConfirmButton: false,
+                    timer: 1700,
+                });
+            });
         commit("deleteBook", id)
     }
 };
