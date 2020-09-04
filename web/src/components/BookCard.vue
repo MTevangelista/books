@@ -1,6 +1,6 @@
 <template>
   <b-card
-    :key="book.id"
+    :key="book._id"
     :title="book.title"
     :sub-title="book.theme"
     :img-src="book.imageUrl"

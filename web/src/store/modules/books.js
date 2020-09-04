@@ -66,6 +66,7 @@ const actions = {
     async deleteBook({ commit }, id) {
         await axios.delete(`${baseURL}/books/${id}`)
             .then(() => {
+                commit("deleteBook", id)
                 Swal.fire({
                     icon: "success",
                     title: "Livro apagado com sucesso!",
@@ -81,7 +82,6 @@ const actions = {
                     timer: 1700,
                 });
             });
-        commit("deleteBook", id)
     }
 };
 const mutations = {
@@ -94,7 +94,7 @@ const mutations = {
             state.books.splice(index, 1, newBook);
         }
     },
-    deleteBook: (state, id) => (state.books.filter(book => book.id !== id), state.books.splice(book => book.id, 1))
+    deleteBook: (state, id) => (state.books = state.books.filter(book => book._id !== id)),
 };
 
 export default {
