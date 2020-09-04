@@ -16,14 +16,9 @@
 
     <b-row>
       <b-col class="text-center">
-        <img class="mt-5" src="../assets/logo.png" alt="Books logo" />
+        <img class="image-style mt-5" src="../assets/logo.png" alt="Books logo" />
       </b-col>
     </b-row>
-
-    <b-form class="search-books" @submit="searchBooks">
-      <b-form-select class="search-select" v-model="theme" :options="options"></b-form-select>
-      <b-button type="submit" variant="outline-success">Buscar</b-button>
-    </b-form>
 
     <b-row>
       <b-card-group deck>
@@ -35,7 +30,7 @@
           :img-src="book.imageUrl"
           :img-alt="book.title"
           img-height="200px"
-          class="cards"
+          class="card"
         >
           <b-card-text>{{book.description}}</b-card-text>
 
@@ -111,13 +106,13 @@ export default {
   opacity: 0.5;
 }
 
-.cards {
+.card {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  margin: 20px 20px 20px 20px;
-  width: 400px;
-  min-width: 380px;
+  margin: 10px auto;
+  min-width: 24rem;
+  max-width: 45%;
 }
 
 .buttons-container {
@@ -125,5 +120,15 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
+}
+
+@media (max-width: 415px) {
+  .image-style {
+    width: 250px;
+  }
+  .card {
+    min-width: 18rem;
+    max-width: 35%;
+  }
 }
 </style>
