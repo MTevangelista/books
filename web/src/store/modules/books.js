@@ -64,7 +64,7 @@ const actions = {
         commit('updateBook', response.data)
     },
     async deleteBook({ commit }, id) {
-        await axios.delete(`${baseURL}/books/${id}`);
+        await axios.delete(`${baseURL}/books/${id}`)
         commit("deleteBook", id)
     }
 };

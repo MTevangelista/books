@@ -17,7 +17,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "PageHeader",
+};
 </script>
 
 <style scoped>
