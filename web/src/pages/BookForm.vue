@@ -1,22 +1,6 @@
 <template>
   <b-container>
-    <b-navbar type="dark" variant="dark" fixed="top" toggleable="lg">
-      <b-navbar-nav class="ml-5">
-        <b-nav-item class="nav-item-style">
-          <router-link class="router-link-navbar" :to="{ name: 'Home' }"
-            >Home</router-link
-          >
-        </b-nav-item>
-      </b-navbar-nav>
-
-      <b-navbar-nav class="ml-auto mr-5">
-        <b-nav-item class="nav-item-style">
-          <router-link class="router-link-navbar" :to="{ name: 'BookForm' }"
-            >Novo Livro</router-link
-          >
-        </b-nav-item>
-      </b-navbar-nav>
-    </b-navbar>
+    <PageHeader />
 
     <h1 class="title">Cadastrar Livro</h1>
 
@@ -153,10 +137,13 @@
 
 <script>
 import { mapActions } from "vuex";
-// import Swal from "sweetalert2";
+import PageHeader from '../components/PageHeader'
 
 export default {
   name: "BookForm",
+  components: {
+    PageHeader
+  },
   data() {
     return {
       book: {
@@ -194,32 +181,6 @@ export default {
       }
 
       this.addBook(book)
-
-      // this.addBook({
-      //   imageUrl: this.book.imageUrl,
-      //   author: this.book.author,
-      //   title: this.book.title,
-      //   slug: this.book.slug,
-      //   theme: this.book.theme,
-      //   description: this.book.description,
-      //   createdAt: this.book.createdAt,
-      // })
-        // .then(() => {
-        //   Swal.fire({
-        //     icon: "success",
-        //     title: "Cadastro realizado com sucesso!",
-        //     showConfirmButton: false,
-        //     timer: 1700,
-        //   });
-        // })
-        // .catch(() => {
-        //   Swal.fire({
-        //     icon: "error",
-        //     title: "Erro no cadastro!",
-        //     showConfirmButton: false,
-        //     timer: 1700,
-        //   });
-        // });
     },
   },
 };

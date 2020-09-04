@@ -1,5 +1,7 @@
 <template>
   <b-container>
+    <PageHeader />
+
     <h1 class="title">Editar Livro</h1>
 
     <b-card bg-variant="light">
@@ -109,9 +111,13 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import PageHeader from '../components/PageHeader'
 
 export default {
   name: "BookDetails",
+  components: {
+    PageHeader
+  },
   data() {
     return {
       book: {

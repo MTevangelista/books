@@ -1,18 +1,6 @@
 <template>
   <b-container class="mt-5">
-    <b-navbar type="dark" variant="dark" fixed="top" toggleable="lg">
-      <b-navbar-nav class="ml-5">
-        <b-nav-item class="nav-item-style">
-          <router-link class="router-link-navbar" :to="{ name: 'Home' }">Home</router-link>
-        </b-nav-item>
-      </b-navbar-nav>
-
-      <b-navbar-nav class="ml-auto mr-5">
-        <b-nav-item class="nav-item-style">
-          <router-link class="router-link-navbar" :to="{ name: 'BookForm' }">Novo Livro</router-link>
-        </b-nav-item>
-      </b-navbar-nav>
-    </b-navbar>
+    <PageHeader />
 
     <b-row>
       <b-col class="text-center">
@@ -50,9 +38,13 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import PageHeader from '../components/PageHeader'
 
 export default {
   name: "Home",
+  components: {
+    PageHeader
+  },
   data() {
     return {
       theme: null,
@@ -81,31 +73,6 @@ export default {
 </script>
 
 <style scoped>
-.search-books {
-  text-align: center;
-}
-
-.search-select {
-  width: 60%;
-  margin-right: 10px;
-}
-
-.nav-item-style {
-  font-size: 20px;
-}
-
-.router-link-navbar {
-  color: whitesmoke;
-  text-decoration: none;
-  transition: 0.2s;
-}
-
-.router-link-navbar:hover {
-  color: whitesmoke;
-  text-decoration: none;
-  opacity: 0.5;
-}
-
 .card {
   display: flex;
   justify-content: space-around;
