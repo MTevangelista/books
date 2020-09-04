@@ -91,7 +91,7 @@ const mutations = {
     updateBook: (state, newBook) => {
         const index = state.books.findIndex(book => book.id === newBook.id);
         if (index >= 0) {
-            state.comps.splice(index, 1, newBook);
+            state.books.splice(index, 1, newBook);
         }
     },
     deleteBook: (state, id) => (state.books.filter(book => book.id !== id), state.books.splice(book => book.id, 1))
