@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 
 import Home from '../src/pages/Home.vue'
 import BookForm from '../src/pages/BookForm.vue'
-import BookDetails from '../src/pages/BookDetails.vue'
+import EditBook from '../src/pages/EditBook.vue'
 Vue.use(VueRouter);
 
 export default new VueRouter({
@@ -20,9 +20,9 @@ export default new VueRouter({
             component: BookForm
         },
         {
-            path: '/book-details',
-            name: 'BookDetails',
-            component: BookDetails
+            path: '/edit-book',
+            name: 'EditBook',
+            component: EditBook
         },
     ]
 });

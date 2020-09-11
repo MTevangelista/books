@@ -13,7 +13,7 @@
     <small>Lançamento: {{ book.createdAt }}</small>
 
     <b-card-text class="buttons-container">
-      <router-link :to="{ name: 'BookDetails', params: { book } }">
+      <router-link :to="{ name: 'EditBook', params: { book } }">
         <b-button variant="outline-info">Editar</b-button>
       </router-link>
       <b-button variant="outline-danger" @click="deleteBook(book._id)">Apagar</b-button>
