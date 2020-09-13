@@ -8,9 +8,17 @@
     img-height="200px"
     class="card"
   >
+    <router-link :to="{ name: 'BookDetails', params: { slug: book.slug } }">
+      <b-icon variant="info" class="info-icon" scale="1.2" icon="info-circle"></b-icon>
+    </router-link>
+
     <b-card-text>{{book.description}}</b-card-text>
 
     <small>Lançamento: {{ book.createdAt }}</small>
+
+    <b-card-text>
+      <small>Autor: {{ book.author }}</small>
+    </b-card-text>
 
     <b-card-text class="buttons-container">
       <router-link :to="{ name: 'EditBook', params: { book } }">
@@ -37,6 +45,10 @@ export default {
 </script>
 
 <style scoped>
+.info-icon {
+  margin: -4rem 0rem 3.8rem 28rem;
+}
+
 .card {
   display: flex;
   justify-content: space-around;
