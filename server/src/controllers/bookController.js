@@ -57,6 +57,11 @@ exports.create = async(req, res) => {
         createdAt
     }
 
+    const existingSlug = await repository.checkIfSlugExists(slug)
+    if (existingSlug) {
+        return res.status(400).json({message: 'Slug já cadastrado!'})
+    }
+
     try {
         await repository.create(book)
         return res.status(201).send()

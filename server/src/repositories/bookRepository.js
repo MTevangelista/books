@@ -42,3 +42,8 @@ exports.update = async(_id, { imageUrl, author, title, theme, description, creat
 exports.delete = async(_id) => {
     await Book.findByIdAndRemove(_id)
 }
+
+exports.checkIfSlugExists = async(slug) => {
+    const res = Book.findOne({ slug })
+    return res
+}
