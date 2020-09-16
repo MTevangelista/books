@@ -34,7 +34,7 @@ export default {
   methods: {
     ...mapActions(["fetchBooks"]),
   },
-  computed: mapGetters(["allBooks"]),
+  computed: mapGetters(["allBooks", "errorMessage"]),
   created() {
     this.fetchBooks();
   }

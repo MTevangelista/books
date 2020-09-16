@@ -4,6 +4,15 @@
 
     <h1 class="title">Cadastrar Livro</h1>
 
+    <b-alert 
+      variant="danger" 
+      show dismissible 
+      v-for="message in errorMessage" 
+      :key=message.errorMessage
+    >
+      {{ message }}
+    </b-alert>
+
     <b-card bg-variant="light">
       <b-form @submit="handleCreateBook">
         <b-form-group
@@ -136,7 +145,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import PageHeader from '../components/PageHeader'
 
 export default {
@@ -165,6 +174,7 @@ export default {
       ],
     };
   },
+  computed: mapGetters(["errorMessage"]),
   methods: {
     ...mapActions(["addBook"]),
     handleCreateBook(event) {

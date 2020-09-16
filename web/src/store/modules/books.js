@@ -6,12 +6,14 @@ import Swal from "sweetalert2";
 
 const state = {
     books: [],
-    book: null
+    book: null,
+    errorMessage: [],
 };
 
 const getters = {
     allBooks: state => state.books,
-    getBook: state => state.book
+    getBook: state => state.book,
+    errorMessage: state => state.errorMessage
 };
 
 const actions = {
@@ -24,24 +26,25 @@ const actions = {
         commit("getBookBySlug", response.data)
     },
     async addBook({ commit }, book) {
-        const response = await axios.post(`${baseURL}/books`, book)
-            .then(() => {
+        await axios.post(`${baseURL}/books`, book)
+            .then(response => {
                 Swal.fire({
                     icon: "success",
                     title: "Cadastro realizado com sucesso!",
                     showConfirmButton: false,
                     timer: 1700,
                 });
+                commit('newBook', response.data)
             })
-            .catch(() => {
+            .catch((error) => {
                 Swal.fire({
                     icon: "error",
-                    title: "Erro no cadastro!",
+                    title: 'Erro no cadastro!',
                     showConfirmButton: false,
                     timer: 1700,
                 });
+                commit('errorMessage', error.response.data.message)
             });
-        commit('newBook', response.data)
     },
     async updateBook({ commit }, newBook) {
         const response = await axios.put(`${baseURL}/books/${newBook.id}`, newBook)
@@ -95,6 +98,7 @@ const mutations = {
         }
     },
     deleteBook: (state, id) => (state.books = state.books.filter(book => book._id !== id)),
+    errorMessage: (state, errorMessage) => state.errorMessage.unshift(errorMessage),
 };
 
 export default {
