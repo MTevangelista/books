@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = 'http://localhost:3333'
+const baseURL = 'https://books-backend-api.herokuapp.com/api/books'
 
 import Swal from "sweetalert2";
 
@@ -22,11 +22,11 @@ const actions = {
         commit('setBooks', response.data)
     },
     async getBookBySlug({ commit }, slug) {
-        const response = await axios.get(`${baseURL}/books/${slug}`)
+        const response = await axios.get(`${baseURL}/${slug}`)
         commit("getBookBySlug", response.data)
     },
     async addBook({ commit }, book) {
-        await axios.post(`${baseURL}/books`, book)
+        await axios.post(`${baseURL}`, book)
             .then(response => {
                 Swal.fire({
                     icon: "success",
@@ -47,7 +47,7 @@ const actions = {
             });
     },
     async updateBook({ commit }, newBook) {
-        const response = await axios.put(`${baseURL}/books/${newBook.id}`, newBook)
+        const response = await axios.put(`${baseURL}/${newBook.id}`, newBook)
             .then(() => {
                 Swal.fire({
                     icon: "success",
@@ -67,7 +67,7 @@ const actions = {
         commit('updateBook', response.data)
     },
     async deleteBook({ commit }, id) {
-        await axios.delete(`${baseURL}/books/${id}`)
+        await axios.delete(`${baseURL}/${id}`)
             .then(() => {
                 commit("deleteBook", id)
                 Swal.fire({
